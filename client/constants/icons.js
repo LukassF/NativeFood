@@ -17,6 +17,12 @@ const icons = {
   account: {
     uri: "https://cdn-icons-png.flaticon.com/128/456/456212.png",
   },
+  starFilled: {
+    uri: "https://cdn-icons-png.flaticon.com/512/56/56786.png",
+  },
+  starOutline: {
+    uri: "https://cdn-icons-png.flaticon.com/512/13/13595.png",
+  },
 };
 
 export default icons;

@@ -10,7 +10,7 @@ import icons from "../../../constants/icons";
 import styles from "./welcome_styles";
 import { useEffect, useState } from "react";
 
-const filters = ["Vegan", "Sweet", "Gluten Free", "Plant Based"];
+const filters = ["Vegan","Meat", "Gluten Free", "Plant Based","Spicy"];
 
 export default function WelcomeSearch({ setSearch, setActiveFilter, activeFilter }) {
   const [date, setDate] = useState(new Date());
@@ -50,7 +50,7 @@ export default function WelcomeSearch({ setSearch, setActiveFilter, activeFilter
       <View style={styles.searchView}>
         <TextInput
           style={styles.searchInput}
-          onChangeText={setLocalSearch}
+          onChangeText={setSearch}
           placeholder="Whatever you wish!"
         />
         <TouchableOpacity
@@ -66,13 +66,14 @@ export default function WelcomeSearch({ setSearch, setActiveFilter, activeFilter
       <FlatList 
       data={filters} 
       renderItem={({item}) => (
-        <TouchableOpacity style={styles.filterTab(activeFilter === item)} onPress={() => setActiveFilter(item)}>
+        <TouchableOpacity style={styles.filterTab(activeFilter === item)} onPress={() => activeFilter === item ? setActiveFilter('') :setActiveFilter(item)}>
           <Text style={styles.filterTabText(activeFilter === item)}>{item}</Text>
         </TouchableOpacity>
         )} 
         keyExtractor={item => item}
         horizontal
         contentContainerStyle={{columnGap:10}}
+        showsHorizontalScrollIndicator={false}
         
         />
     </View>

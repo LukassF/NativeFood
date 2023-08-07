@@ -2,12 +2,9 @@ import { ActivityIndicator, Text, View } from "react-native"
 import useFetch from "../../../hooks/useFetch"
 import { useEffect } from "react"
 
-export default function Popular({search, activeFilter}) {
-    const [fetchData,loading] = useFetch(search)
-    console.log(activeFilter)
-    useEffect(() => {
-        // console.log(fetchData)
-    },[search])
+export default function Products({search, activeFilter}) {
+    const [fetchData,loading] = useFetch(search,activeFilter,0)
+
   return (
     <View>
         {loading ? <ActivityIndicator size={"large"}/> : 
