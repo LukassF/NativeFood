@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function useFetch(searchValue, selectedFilter, length) {
+export default function useFetch(searchValue, selectedFilter, id, length) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(searchValue, "|", selectedFilter);
 
   const options = {
     method: "GET",
     // url: `https://api.api-ninjas.com/v1/cocktail?name=${searchValue}`,
-    url: `http://192.168.1.105:5000/api?query=${searchValue}&filter=${selectedFilter}`,
+    url: `http://192.168.1.105:5000/api?query=${searchValue}&filter=${selectedFilter}&id=${id}`,
     // 192.168.1.105
     // headers: {
     //   "X-Api-Key": "  RVz6/ihMrkYTJDp3G9yg8g==5LtuWBVLZpYgox7q",

@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingTop: 10,
     rowGap: 25,
+    minHeight: 250,
   },
 
   featuredCard: {

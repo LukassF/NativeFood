@@ -6,7 +6,7 @@ import Products from "../../components/home/products/Products";
 import Featured from "../../components/home/featured/Featured";
 
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [search, setSearch] = useState('')
   const [activeFilter, setActiveFilter] = useState('')
   
@@ -15,8 +15,8 @@ const Home = () => {
     <SafeAreaView style={{ flex: 1, marginTop:StatusBar.currentHeight,padding:10}}>
       <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
         <WelcomeSearch setSearch={setSearch} setActiveFilter={setActiveFilter} activeFilter={activeFilter}/>
-        <Featured />
-        <Products search={search} activeFilter={activeFilter}/>
+        <Featured navigation={navigation}/>
+        <Products search={search} activeFilter={activeFilter} navigation={navigation}/>
       </ScrollView>
     </SafeAreaView>
   );
