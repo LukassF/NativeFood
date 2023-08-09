@@ -1,15 +1,11 @@
 import { SafeAreaView, Text } from "react-native";
 
-
-const Cart = () => {
-
-
+const Add = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#3F7CAC" }}>
-      <Text>Cart</Text>
-
+      <Text>Add</Text>
     </SafeAreaView>
   );
 };
 
-export default Cart;
+export default Add;

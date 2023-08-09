@@ -9,12 +9,17 @@ import {
 import icons from "../../../constants/icons";
 import styles from "./welcome_styles";
 import { useEffect, useState } from "react";
+import { fonts } from "../../../constants/fonts";
 
-const filters = ["Vegan","Meat", "Gluten Free", "Plant Based","Spicy"];
+const filters = ["Vegan", "Meat", "Gluten Free", "Plant Based", "Spicy"];
 
-export default function WelcomeSearch({ setSearch, setActiveFilter, activeFilter }) {
+export default function WelcomeSearch({
+  setSearch,
+  setActiveFilter,
+  activeFilter,
+}) {
   const [date, setDate] = useState(new Date());
- 
+
   const [localSearch, setLocalSearch] = useState("");
 
   useEffect(() => {
@@ -36,8 +41,12 @@ export default function WelcomeSearch({ setSearch, setActiveFilter, activeFilter
         }}
       >
         <View>
-          <Text style={{ fontSize: 20, fontWeight: 900 }}>Welcome Łukasz!</Text>
-          <Text style={{ fontSize: 12 }}>What are we eating today?</Text>
+          <Text style={{ fontSize: 20, fontFamily: fonts.bold }}>
+            Welcome Łukasz!
+          </Text>
+          <Text style={{ fontSize: 12, fontFamily: fonts.medium }}>
+            What are we eating today?
+          </Text>
         </View>
         <View style={{ justifyContent: "center", alignItems: "flex-end" }}>
           <Text style={{ fontSize: 10 }}>{date.toDateString()}</Text>
@@ -63,19 +72,27 @@ export default function WelcomeSearch({ setSearch, setActiveFilter, activeFilter
           />
         </TouchableOpacity>
       </View>
-      <FlatList 
-      data={filters} 
-      renderItem={({item}) => (
-        <TouchableOpacity style={styles.filterTab(activeFilter === item)} onPress={() => activeFilter === item ? setActiveFilter('') :setActiveFilter(item)}>
-          <Text style={styles.filterTabText(activeFilter === item)}>{item}</Text>
-        </TouchableOpacity>
-        )} 
-        keyExtractor={item => item}
+      <FlatList
+        data={filters}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.filterTab(activeFilter === item)}
+            onPress={() =>
+              activeFilter === item
+                ? setActiveFilter("")
+                : setActiveFilter(item)
+            }
+          >
+            <Text style={styles.filterTabText(activeFilter === item)}>
+              {item}
+            </Text>
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item}
         horizontal
-        contentContainerStyle={{columnGap:10}}
+        contentContainerStyle={{ columnGap: 10 }}
         showsHorizontalScrollIndicator={false}
-        
-        />
+      />
     </View>
   );
 }

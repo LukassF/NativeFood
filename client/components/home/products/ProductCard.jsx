@@ -2,9 +2,14 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "./products_styles";
 import icons from "../../../constants/icons";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { saveRecipe, reset, removeFromSaved } from "../../../app/redux/slice";
 
 export default function ProductCard({ fetchedData, navigation }) {
-  const [saved, setSaved] = useState(false);
+  const dispatch = useDispatch();
+  const savedRecipies = useSelector((state) => state.savedRecipies);
+
+  const saved = savedRecipies.find((item) => item === fetchedData._id);
 
   return (
     <TouchableOpacity
@@ -21,7 +26,13 @@ export default function ProductCard({ fetchedData, navigation }) {
       <View style={styles.content}>
         <TouchableOpacity
           style={styles.saveButton}
-          onPress={() => setSaved(!saved)}
+          onPress={() => {
+            dispatch(
+              !saved
+                ? saveRecipe(fetchedData._id)
+                : removeFromSaved(fetchedData._id)
+            );
+          }}
         >
           <Image
             source={saved ? icons.saveIconFilled : icons.saveIconOutline}
@@ -31,7 +42,7 @@ export default function ProductCard({ fetchedData, navigation }) {
         </TouchableOpacity>
         <Text
           style={{ fontSize: 16, fontWeight: 600, width: "80%" }}
-          numberOfLines={1}
+          numberOfLines={2}
         >
           {fetchedData.name}
         </Text>

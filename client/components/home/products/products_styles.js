@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   saveImage: (saved) => ({
     width: saved ? "100%" : "80%",
     height: saved ? "100%" : "80%",
-    tintColor: saved ? "#ff4f4f" : "black",
+    tintColor: saved ? "rgba(255, 79, 79,0.6)" : "rgba(0,0,0,0.6)",
   }),
 });
 

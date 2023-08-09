@@ -8,10 +8,13 @@ app.get("/api", async (req, res) => {
   const query = req.query.query || "";
   const filter = req.query.filter || "";
   const id = req.query.id || "";
+  const idArray = id[0] === "[" ? id.slice(1, -1).split(",") : id.split(",");
+
+  console.log(idArray);
 
   try {
     let data;
-    if (!id)
+    if (idArray[0] == "")
       data = await model.find({
         $and: [
           {
@@ -29,7 +32,8 @@ app.get("/api", async (req, res) => {
           },
         ],
       });
-    else data = await model.findById(id);
+    else data = await model.find({ _id: { $in: idArray } });
+    // else data = await model.findById(id);
 
     res.json(data);
   } catch (err) {

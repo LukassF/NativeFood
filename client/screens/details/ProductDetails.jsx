@@ -1,17 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Image, Text, View } from "react-native";
 import useFetch from "../../hooks/useFetch";
 import { ScrollView } from "react-native";
 import styles from "./details_style";
+import icons from "../../constants/icons";
+import DetailsHeader from "../../components/details/DetailsHeader";
+import { DetailsIngredients } from "../../components/details/DetailsIngredients";
+import { DetailsPreparation } from "../../components/details/DetailsPreparation";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 function ProductDetails({ route }) {
   const id = route.params._id;
   const [details, loading] = useFetch("", "", id, 0);
+  const [difficultyArray, setDifficultyArray] = useState([]);
 
-  // useEffect(() => {
-  //     if(details.preparation)
-  //     console.log(details.preparation)
-  // },[details])
+  useEffect(() => {
+    // console.log(details);
+    if (details[0])
+      setDifficultyArray(
+        new Array(details[0].difficulty)
+          .fill(1)
+          .concat(new Array(5 - details[0].difficulty).fill(0))
+      );
+  }, [details]);
   return (
     <>
       {loading ? (
@@ -20,78 +31,60 @@ function ProductDetails({ route }) {
         <>
           <View style={styles.detailsImageContainer}>
             <Image
-              source={{ uri: details.image }}
+              source={{ uri: details[0].image }}
               style={{ width: "100%", height: "100%" }}
               resizeMode="cover"
             />
           </View>
           <ScrollView
             contentContainerStyle={{
-              // padding: 20,
               alignItems: "center",
-              //   rowGap: 5,
             }}
+            showsVerticalScrollIndicator={false}
           >
             <View style={{ width: "100%", height: 200 }}></View>
-            <View style={styles.contentView}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 20,
-                  fontWeight: 800,
-                }}
-                numberOfLines={1}
-              >
-                {details.name}
-              </Text>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 14,
-                  fontWeight: 800,
-                  color: "#9b9b9b",
-                }}
-                numberOfLines={1}
-              >
-                {details.subtitle}
-              </Text>
-              {/* <Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
-                perspiciatis asperiores. Illum doloremque reiciendis molestiae
-                doloribus culpa! Aut deserunt nobis numquam maxime fuga
-                suscipit, libero cum, voluptatem molestiae eveniet nulla. Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-                quam aliquid temporibus velit asperiores omnis earum
-                repudiandae, perspiciatis eius fuga minus atque repellat
-                suscipit modi maxime distinctio aperiam possimus. Molestias!
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia
-                repellat, ratione reiciendis, porro adipisci saepe voluptates
-                maiores fuga iusto inventore veniam asperiores fugiat, a dolore
-                dolores. Alias, commodi facilis? Officia. Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Deleniti earum beatae animi
-                perferendis ipsum eligendi! Repellat, ab. Temporibus excepturi,
-                quis repellendus aliquam a quaerat porro deleniti, hic vel
-                assumenda doloremque. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Eius consequuntur odio, laborum aliquam magni
-                eveniet consequatur fugit ex corrupti. Aperiam totam aut velit
-                iure ab iste placeat eum! Maxime, corporis. Lorem ipsum dolor
-                sit amet consectetur adipisicing elit. Laborum debitis sit eos
-                quos aperiam blanditiis fugiat a veritatis quod doloribus!
-                Adipisci vitae maxime a dolor quaerat voluptatibus? Libero, fuga
-                beatae? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Velit, ipsam voluptates neque dolorem et a dolorum enim adipisci
-                qui repudiandae aperiam necessitatibus dolores architecto esse
-                veniam quis rem cupiditate praesentium. Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Libero perferendis rerum
-                magnam. Dolorem deleniti, atque quis odio magnam, magni ducimus
-                eveniet perspiciatis amet quibusdam nostrum debitis excepturi
-                deserunt enim dolorum. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Assumenda suscipit molestiae voluptas alias
-                quo impedit placeat. Vero quas iure laboriosam aspernatur
-                nostrum quod soluta, adipisci, reiciendis aperiam aut, ullam
-                dolorum!
-              </Text> */}
-            </View>
+            {details && (
+              <View style={styles.contentView}>
+                <DetailsHeader details={details[0]} />
+                <DetailsIngredients details={details[0]} />
+                <DetailsPreparation details={details[0]} />
+
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 6,
+                    padding: 10,
+                    marginTop: 30,
+                    borderRadius: 10,
+                    borderColor: "#e2e2e2",
+                    borderWidth: 1,
+                  }}
+                >
+                  <Text style={{ marginRight: 10 }}>Difficulty:</Text>
+                  {difficultyArray.map((item) => {
+                    if (item === 1) {
+                      return (
+                        <Image
+                          source={icons.starFilled}
+                          style={styles.starImage(true)}
+                          key={Math.random()}
+                        />
+                      );
+                    } else {
+                      return (
+                        <Image
+                          source={icons.starOutline}
+                          style={styles.starImage(false)}
+                          key={Math.random()}
+                        />
+                      );
+                    }
+                  })}
+                </View>
+              </View>
+            )}
           </ScrollView>
         </>
       )}

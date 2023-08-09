@@ -14,6 +14,12 @@ const icons = {
   browse: {
     uri: "https://cdn-icons-png.flaticon.com/128/64/64673.png",
   },
+  add: {
+    uri: "https://static.thenounproject.com/png/1381654-200.png",
+  },
+  random: {
+    uri: "https://cdn-icons-png.flaticon.com/512/2989/2989898.png",
+  },
   account: {
     uri: "https://cdn-icons-png.flaticon.com/128/456/456212.png",
   },
@@ -31,6 +37,34 @@ const icons = {
   },
   saveIconFilled: {
     uri: "https://icons.veryicon.com/png/o/miscellaneous/currency/bookmark-61.png",
+  },
+  Meat: {
+    icon: {
+      uri: "https://static.thenounproject.com/png/5965-200.png",
+    },
+    color: "#f4b789",
+  },
+  Spicy: {
+    icon: {
+      uri: "https://cdn-icons-png.flaticon.com/512/135/135239.png",
+    },
+    color: "red",
+  },
+  GlutenFree: {
+    icon: {
+      uri: "https://img.icons8.com/ios11/12x/wheat.png",
+    },
+    color: "#e0ad2c",
+  },
+  PlantBased: {
+    icon: {
+      uri: "https://static.thenounproject.com/png/29976-200.png",
+    },
+    color: "#a8ef2d",
+  },
+
+  listPoint: {
+    uri: "https://icons-for-free.com/iconfiles/png/512/arrow+back+arrow+right+right+icon-1320185739082709708.png",
   },
 };
 

@@ -1,12 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "../screens/home/Home";
-import Cart from "../screens/cart/Cart";
-import Browse from "../screens/browse/Browse";
-import Account from "../screens/account/Account";
+
 import { Image, StyleSheet, View, Text } from "react-native";
 import icons from "../constants/icons";
-import HeaderBtn from "../components/header/headerBtn";
+import Saved from "../screens/saved/Saved";
+import Random from "../screens/random/Random";
+import Add from "../screens/add/Add";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,37 +40,46 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Cart"
-        component={Cart}
+        name="Saved"
+        component={Saved}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tab}>
-              <Image source={icons.cart} style={styles.tabBtn(focused)} />
-              <Text style={styles.tabText(focused)}>Cart</Text>
+              <Image
+                source={icons.saveIconOutline}
+                style={{ ...styles.tabBtn(focused), width: 22, height: 22 }}
+              />
+              <Text style={styles.tabText(focused)}>Saved</Text>
             </View>
           ),
         }}
       />
       <Tab.Screen
         name="Browse"
-        component={Browse}
+        component={Add}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tab}>
-              <Image source={icons.browse} style={styles.tabBtn(focused)} />
-              <Text style={styles.tabText(focused)}>Browse</Text>
+              <Image
+                source={icons.add}
+                style={{ ...styles.tabBtn(focused), width: 27 }}
+              />
+              <Text style={styles.tabText(focused)}>Add</Text>
             </View>
           ),
         }}
       />
       <Tab.Screen
         name="Account"
-        component={Account}
+        component={Random}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tab}>
-              <Image source={icons.account} style={styles.tabBtn(focused)} />
-              <Text style={styles.tabText(focused)}>Account</Text>
+              <Image
+                source={icons.random}
+                style={{ ...styles.tabBtn(focused), width: 25 }}
+              />
+              <Text style={styles.tabText(focused)}>Random</Text>
             </View>
           ),
         }}
@@ -85,16 +94,16 @@ const styles = StyleSheet.create({
   tabBtn: (focused) => ({
     width: 20,
     height: 20,
-    tintColor: focused ? "#70587C" : "#50514F",
+    tintColor: focused ? "#5DD9C1" : "#50514F",
   }),
   tabText: (focused) => ({
-    color: focused ? "#70587C" : "#50514F",
+    color: focused ? "#5DD9C1" : "#50514F",
     fontSize: 12,
     fontWeight: focused ? 900 : 400,
   }),
   tab: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     gap: 4,
   },
 });
