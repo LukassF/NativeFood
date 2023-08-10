@@ -10,6 +10,9 @@ import {
 } from "react-native";
 import CameraComponent from "../../components/add/CameraComponent";
 import * as MediaLibrary from "expo-media-library";
+import { fonts } from "../../constants/fonts";
+import styles from "./add_page_style";
+import FormComponent from "../../components/add/FormComponent";
 
 const Add = ({ navigation }) => {
   const [photo, setPhoto] = useState();
@@ -36,6 +39,7 @@ const Add = ({ navigation }) => {
     const savePhoto = async () => {
       try {
         await MediaLibrary.saveToLibraryAsync(photo.normal.uri);
+        alert("Saved to gallery on this device!");
       } catch (err) {
         console.log(err);
       }
@@ -43,19 +47,57 @@ const Add = ({ navigation }) => {
 
     return (
       <SafeAreaView style={{ marginTop: StatusBar.currentHeight }}>
-        <ScrollView>
-          <TouchableOpacity onPress={() => setPhoto()}>
-            <Text>Photo Taken</Text>
-          </TouchableOpacity>
-          {hasMediaLibraryPermissions && (
-            <TouchableOpacity onPress={savePhoto}>
-              <Text>Save to gallery</Text>
-            </TouchableOpacity>
-          )}
-          <Image
-            source={{ uri: photo.encoded }}
-            style={{ width: 100, height: 100 }}
-          />
+        <ScrollView showsHorizontalScrollIndicator={false}>
+          <Text
+            style={{
+              fontSize: 20,
+              fontFamily: fonts.bold,
+              textAlign: "center",
+              padding: 20,
+            }}
+          >
+            Upload your own recipe!
+          </Text>
+          <View>
+            <View style={styles.imageContainer}>
+              <TouchableOpacity
+                style={styles.buttonSave}
+                onPress={() =>
+                  hasMediaLibraryPermissions
+                    ? savePhoto()
+                    : alert("No permission")
+                }
+              >
+                <Image
+                  source={{
+                    uri: "https://icons.veryicon.com/png/o/education-technology/big-data-cloud-service-general-icon-library/icon-save.png",
+                  }}
+                  style={{ width: 20, height: 20 }}
+                  resizeMode="cover"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setPhoto()}
+                style={styles.imagePreview}
+              >
+                <Image
+                  source={{ uri: photo.encoded }}
+                  style={{ width: "100%", height: "100%" }}
+                  resizeMode="cover"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonSave}>
+                <Image
+                  source={{
+                    uri: "https://cdn-icons-png.flaticon.com/512/1358/1358023.png",
+                  }}
+                  style={{ width: 20, height: 20 }}
+                  resizeMode="cover"
+                />
+              </TouchableOpacity>
+            </View>
+            <FormComponent photo={photo.encoded} />
+          </View>
         </ScrollView>
       </SafeAreaView>
     );
