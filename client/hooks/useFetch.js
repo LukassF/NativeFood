@@ -10,7 +10,7 @@ export default function useFetch(searchValue, selectedFilter, id, length) {
   const options = {
     method: "GET",
 
-    url: `http://192.168.1.105:5000/api?query=${searchValue}&filter=${selectedFilter}&id=[${
+    url: `http://192.168.1.105:5000/api/recipies?query=${searchValue}&filter=${selectedFilter}&id=[${
       id instanceof Array ? id.map((id) => id) : id
     }]`,
     // 192.168.1.105

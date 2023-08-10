@@ -39,16 +39,6 @@ export default function Products({ search, activeFilter, navigation }) {
           <Text>No results</Text>
         )}
       </View>
-
-      {/* {loading ? <ActivityIndicator size={"large"}/> : 
-        fetchData.length !== 0 ?
-        fetchData.map(product => (
-            <Text>{product ? product.name : ''}</Text>
-        ))
-        :
-        <Text>No results</Text>
-        }
-        */}
     </View>
   );
 }

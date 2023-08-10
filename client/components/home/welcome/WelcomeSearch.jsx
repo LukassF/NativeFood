@@ -11,7 +11,14 @@ import styles from "./welcome_styles";
 import { useEffect, useState } from "react";
 import { fonts } from "../../../constants/fonts";
 
-const filters = ["Vegan", "Meat", "Gluten Free", "Plant Based", "Spicy"];
+const filters = [
+  "Vegan",
+  "Meat",
+  "Gluten Free",
+  "Plant Based",
+  "Spicy",
+  "Sweet",
+];
 
 export default function WelcomeSearch({
   setSearch,

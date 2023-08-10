@@ -62,6 +62,19 @@ const icons = {
     },
     color: "#a8ef2d",
   },
+  Vegan: {
+    icon: {
+      uri: "https://cdn-icons-png.flaticon.com/512/259/259396.png",
+    },
+    color: "green",
+  },
+
+  Sweet: {
+    icon: {
+      uri: "https://cdn-icons-png.flaticon.com/512/2971/2971530.png",
+    },
+    color: "pink",
+  },
 
   listPoint: {
     uri: "https://icons-for-free.com/iconfiles/png/512/arrow+back+arrow+right+right+icon-1320185739082709708.png",

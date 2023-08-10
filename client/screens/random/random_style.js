@@ -13,14 +13,15 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
 
-  recipeCard: (isShuffling) => ({
-    width: 300 - isShuffling,
+  recipeCard: {
+    // width: 300 - isShuffling,
+    width: 300,
     borderRadius: 20,
     aspectRatio: 1 / 1,
     overflow: "hidden",
     marginTop: -200,
     zIndex: 200,
-  }),
+  },
 
   titleView: {
     position: "absolute",
@@ -31,17 +32,14 @@ const styles = StyleSheet.create({
     // backgroundColor
   },
 
-  // filterTab: (activeFilter) => ({
-  //   padding: 15,
-  //   paddingLeft: 20,
-  //   paddingRight: 20,
-  //   borderRadius: 500,
-  //   backgroundColor: activeFilter ? "white" : "#565656",
-  // }),
-  // filterTabText: (activeFilter) => ({
-  //   color: activeFilter ? "black" : "white",
-  //   fontSize: 18,
-  // }),
+  filterButton: (activeFilter) => ({
+    width: 55,
+    aspectRatio: 1 / 1,
+    backgroundColor: activeFilter ? "white" : "#1c1c1c",
+    borderRadius: 500,
+    justifyContent: "center",
+    alignItems: "center",
+  }),
 });
 
 export default styles;

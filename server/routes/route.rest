@@ -1,0 +1,26 @@
+# GET http://localhost:5000/api/recipies
+
+
+
+POST http://localhost:5000/api/recipies
+Content-Type: application/json
+
+{
+    "name":"Refreshing Lemonade",
+    "subtitle":"Splendid beverage indeed",
+    "adjectives":[
+        "Sweet", "Plant Based"
+    ],
+    "ingredients":[
+        "2 large lemons", "2 tbs of sugar", "1 lime", "Mint", "500 ml Sparkling water"
+    ],
+    "difficulty":2,
+    "image":"https://media.istockphoto.com/id/537228258/photo/mason-jar-glasses-of-homemade-lemonade-on-rustic-wood.jpg?s=612x612&w=0&k=20&c=Cb8WMSL5djmvT1Ob3ROTC43BBKWDZ_wlWuaSYvbVw3Q=",
+    "time":20,
+    "preparation":[
+        "Combine 1 cup each of sugar and water and cook over medium heat until the sugar dissolves.",
+        "Set the syrup aside to cool for about 10 minutes.",
+        "Combine the cooled syrup and freshly-squeezed lemon juice in a pitcher.",
+        "Add the remaining water and stir, then pour over ice and enjoy!"
+    ]
+}

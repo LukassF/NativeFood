@@ -4,25 +4,36 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Animated,
+  StyleSheet,
   FlatList,
+  Image,
 } from "react-native";
 import styles from "./random_style";
 import RecipeCard from "../../components/random/RecipeCard";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 // import { useEffect } from "react";
 import { fonts } from "../../constants/fonts";
+import icons from "../../constants/icons";
 
-// const filters = ["Vegan", "Meat", "Gluten Free", "Plant Based", "Spicy"];
+const filters = [
+  "Vegan",
+  "Meat",
+  "Gluten Free",
+  "Plant Based",
+  "Spicy",
+  "Sweet",
+];
 
 const Random = ({ navigation }) => {
-  const [data, loading] = useFetch("", "", "", 0);
+  const [activeFilter, setActiveFilter] = useState("");
+  const [data, loading] = useFetch("", activeFilter, "", 0);
   const [arbitrary, setArbitrary] = useState(null);
-  const [intervalId, setIntervalId] = useState("");
-  const [isShuffling, setIsShuffling] = useState(0);
-  // const [activeFilter, setActiveFilter] = useState("");
-  // const slideAnim = useRef(new Animated.Value(0)).current;
+  // const [intervalId, setIntervalId] = useState("");
+  const [changed, setChanged] = useState(false);
+  const [animationLength, setAnimationLength] = useState(300);
+
+  // console.log(icons[filters[0]]);
 
   useEffect(() => {
     if (data) setArbitrary(data[Math.round(Math.random() * (data.length - 1))]);
@@ -38,8 +49,16 @@ const Random = ({ navigation }) => {
         alignItems: "center",
         gap: 10,
         overflow: "hidden",
+        // backgroundColor: "rgb(100,100,100)",
       }}
     >
+      <Image
+        source={{
+          uri: "https://static.nationalgeographic.co.uk/files/styles/image_3200/public/tryitnow_GettyImages-1127515284_HR.jpg?w=1600&h=900",
+        }}
+        style={{ ...StyleSheet.absoluteFillObject }}
+        blurRadius={50}
+      />
       <View
         style={{
           position: "absolute",
@@ -64,7 +83,7 @@ const Random = ({ navigation }) => {
             color: "lightgrey",
           }}
         >
-          Hold or press a button below to randomize.
+          Press a button below to randomize.
         </Text>
       </View>
 
@@ -72,63 +91,58 @@ const Random = ({ navigation }) => {
         <RecipeCard
           item={arbitrary}
           navigation={navigation}
-          isShuffling={isShuffling}
+          changed={changed}
+          animationLength={animationLength}
         />
       )}
 
       <TouchableOpacity
         style={styles.randomButton}
         onPress={() => {
-          clearInterval(intervalId);
-          setArbitrary(data[Math.round(Math.random() * (data.length - 1))]);
-        }}
-        onPressIn={() => {
-          clearInterval(intervalId);
-          setIntervalId(
-            setInterval(() => {
-              setArbitrary(data[Math.round(Math.random() * (data.length - 1))]);
+          let timeoutId;
 
-              setIsShuffling((prev) => (prev < 80 ? prev + 3 : prev));
-            }, 100)
-          );
-        }}
-        onPressOut={() => {
-          setIsShuffling(0);
-          clearInterval(intervalId);
+          clearTimeout(timeoutId);
+          setAnimationLength(300);
+          setChanged((prev) => !prev);
+          timeoutId = setTimeout(() => {
+            setArbitrary(data[Math.round(Math.random() * (data.length - 1))]);
+          }, 300);
         }}
       >
-        <Text style={{ fontSize: 18, color: "white" }}>Hold and release!</Text>
+        <Text style={{ fontSize: 18, color: "white" }}>Press and eat!</Text>
       </TouchableOpacity>
 
-      {/* <FlatList
+      <FlatList
         data={filters}
         style={{
           position: "absolute",
           bottom: "10%",
-          // backgroundColor: "red",
           paddingTop: 20,
           paddingBottom: 20,
           margin: 10,
         }}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.filterTab(activeFilter === item)}
-            onPress={() =>
-              activeFilter === item
-                ? setActiveFilter("")
-                : setActiveFilter(item)
-            }
-          >
-            <Text style={styles.filterTabText(activeFilter === item)}>
-              {item}
-            </Text>
-          </TouchableOpacity>
-        )}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              style={styles.filterButton(activeFilter === item)}
+              onPress={() => setActiveFilter(activeFilter === item ? "" : item)}
+            >
+              <Image
+                source={icons[item.split(" ").join("")].icon}
+                style={{
+                  width: 20,
+                  height: 20,
+                  tintColor: activeFilter === item ? "black" : "white",
+                }}
+              ></Image>
+            </TouchableOpacity>
+          );
+        }}
         keyExtractor={(item) => item}
         horizontal
         contentContainerStyle={{ columnGap: 10 }}
         showsHorizontalScrollIndicator={false}
-      /> */}
+      />
     </SafeAreaView>
   );
 };
