@@ -27,13 +27,10 @@ const filters = [
 
 const Random = ({ navigation }) => {
   const [activeFilter, setActiveFilter] = useState("");
-  const [data, loading] = useFetch("", activeFilter, "", 0);
+  const [data, loading] = useFetch("get", "", activeFilter, "", 0, "");
   const [arbitrary, setArbitrary] = useState(null);
-  // const [intervalId, setIntervalId] = useState("");
   const [changed, setChanged] = useState(false);
   const [animationLength, setAnimationLength] = useState(300);
-
-  // console.log(icons[filters[0]]);
 
   useEffect(() => {
     if (data) setArbitrary(data[Math.round(Math.random() * (data.length - 1))]);

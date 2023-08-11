@@ -39,7 +39,8 @@ router.get("/", async (req, res) => {
 });
 
 router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
+router.use(bodyParser.json({ limit: "100mb", extended: true }));
+router.use(bodyParser.text({ limit: "200mb" }));
 
 router.post("/", async (req, res) => {
   const recipe = new model({

@@ -9,6 +9,8 @@ import {
 import styles from "./form_style";
 import NumberInput from "./NumberInput";
 import { fonts } from "../../constants/fonts";
+import useFetch from "../../hooks/useFetch";
+import axios from "axios";
 
 const filters = [
   "Vegan",
@@ -42,13 +44,30 @@ const FormComponent = ({ photo }) => {
     });
   }
 
-  // useEffect(() => {
-  //   console.log(dataBody);
-  // }, [dataBody]);
+  useEffect(() => {
+    if (dataBody) {
+      const values = [...Object.values(dataBody)].filter(
+        (item) => !item || item.length === 0
+      );
+      if (values.length === 0) {
+        // console.log(dataBody);
+        fetch("http://192.168.1.105:5000/api/recipies", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataBody),
+        })
+          .then((res) => alert("Sent", res.status))
+          .catch((err) => console.log(err));
+      }
+    }
+  }, [dataBody]);
+
   return (
     <View style={styles.formContainer}>
       <View style={{ padding: 8 }}>
-        <Text style={styles.formLabel}>Recipe name</Text>
+        <Text style={styles.formLabel}>Recipe name*</Text>
         <TextInput
           style={styles.formInput(dataBody && !name)}
           placeholder="Such as 'Barbeque ribs'."
@@ -57,7 +76,7 @@ const FormComponent = ({ photo }) => {
         />
       </View>
       <View style={{ padding: 8 }}>
-        <Text style={styles.formLabel}>Subtitle</Text>
+        <Text style={styles.formLabel}>Subtitle*</Text>
         <TextInput
           style={styles.formInput(dataBody && !subtitle)}
           placeholder="A memorable subtitle!"
@@ -66,7 +85,7 @@ const FormComponent = ({ photo }) => {
         />
       </View>
       <View style={{ padding: 8 }}>
-        <Text style={styles.formLabel}>Ingredients</Text>
+        <Text style={styles.formLabel}>Ingredients*</Text>
         <TextInput
           style={styles.formInput(dataBody && !ingredients)}
           placeholder="List the ingredients separated by a comma."
@@ -75,7 +94,7 @@ const FormComponent = ({ photo }) => {
         />
       </View>
       <View style={{ padding: 8 }}>
-        <Text style={styles.formLabel}>Preparation</Text>
+        <Text style={styles.formLabel}>Preparation*</Text>
         <TextInput
           style={{
             ...styles.formInput(dataBody && !preparation),
@@ -91,7 +110,7 @@ const FormComponent = ({ photo }) => {
       </View>
 
       <View style={{ padding: 8 }}>
-        <Text style={styles.formLabel}>Characteristics</Text>
+        <Text style={styles.formLabel}>Characteristics*</Text>
         <FlatList
           data={filters}
           renderItem={({ item }) => (
@@ -120,12 +139,17 @@ const FormComponent = ({ photo }) => {
           )}
           keyExtractor={(item) => item}
           horizontal
-          //   contentContainerStyle={{
-          //     columnGap: 10,
-          //   }}
           style={{
-            borderRadius: 5,
-            backgroundColor: "white",
+            borderRadius: 10,
+            backgroundColor:
+              activeFilters.length === 0 && dataBody
+                ? "rgba(249, 9, 9,0.1)"
+                : "white",
+            borderWidth: 1,
+            borderColor:
+              activeFilters.length === 0 && dataBody
+                ? "rgba(249, 9, 9,0.6)"
+                : "transparent",
             paddingTop: 15,
             paddingBottom: 15,
           }}
@@ -135,7 +159,7 @@ const FormComponent = ({ photo }) => {
 
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <View style={{ padding: 8, width: "40%" }}>
-          <Text style={styles.formLabel}>Time</Text>
+          <Text style={styles.formLabel}>Time*</Text>
           <View style={{ flexDirection: "row", columnGap: 10 }}>
             <NumberInput
               onChangeNumber={(value) => setTime(value)}
@@ -151,7 +175,7 @@ const FormComponent = ({ photo }) => {
           <Text
             style={{ fontSize: 16, fontFamily: fonts.medium, marginBottom: -7 }}
           >
-            Difficulty
+            Difficulty*
           </Text>
           <View
             style={{
@@ -187,7 +211,6 @@ const FormComponent = ({ photo }) => {
 
       <View
         style={{
-          // backgroundColor: "red",
           padding: 20,
           justifyContent: "center",
           alignItems: "center",
@@ -200,8 +223,6 @@ const FormComponent = ({ photo }) => {
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
-            // paddingLeft: 50,
-            // paddingRight: 50,
             backgroundColor: "#5DD9C1",
             borderRadius: 500,
           }}
@@ -212,6 +233,13 @@ const FormComponent = ({ photo }) => {
             Add a recipe!
           </Text>
         </TouchableOpacity>
+      </View>
+
+      <View>
+        <Text style={{ padding: 10, fontSize: 12, fontFamily: fonts.light }}>
+          * - required field (field cannot be empty in in order to proceed with
+          the upload)
+        </Text>
       </View>
     </View>
   );

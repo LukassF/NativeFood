@@ -11,7 +11,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 function ProductDetails({ route }) {
   const id = route.params._id;
-  const [details, loading] = useFetch("", "", id, 0);
+  const [details, loading] = useFetch("get", "", "", id, 0, "");
   const [difficultyArray, setDifficultyArray] = useState([]);
 
   useEffect(() => {

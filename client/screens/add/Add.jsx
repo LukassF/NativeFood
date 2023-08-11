@@ -29,11 +29,9 @@ const Add = ({ navigation }) => {
   });
   //-----------------------------------------------
 
-  // useEffect(() => {
-  //   if (photo) {
-  //     console.log(photo.encoded);
-  //   }
-  // }, [photo]);
+  useEffect(() => {
+    if (photo) console.log((photo.encoded.length * (3 / 4)) / 1024);
+  }, [photo]);
 
   if (photo) {
     const savePhoto = async () => {

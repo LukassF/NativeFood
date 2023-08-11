@@ -14,7 +14,14 @@ import { useState } from "react";
 
 const Saved = ({ navigation }) => {
   const savedRecipies = useSelector((state) => state.savedRecipies);
-  const [savedRecipiesData, loading] = useFetch("", "", savedRecipies, 0);
+  const [savedRecipiesData, loading] = useFetch(
+    "get",
+    "",
+    "",
+    savedRecipies,
+    0,
+    ""
+  );
 
   return (
     <ScrollView

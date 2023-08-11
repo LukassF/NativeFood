@@ -28,8 +28,10 @@ const styles = StyleSheet.create({
   },
 
   formInput: (isEmpty) => ({
-    backgroundColor: isEmpty ? "red" : "white",
-    borderRadius: 5,
+    backgroundColor: isEmpty ? "rgba(249, 9, 9,0.1)" : "white",
+    borderWidth: 1,
+    borderColor: isEmpty ? "rgba(249, 9, 9,0.6)" : "transparent",
+    borderRadius: 10,
     padding: 7,
     paddingLeft: 10,
     paddingRight: 10,

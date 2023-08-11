@@ -12,7 +12,7 @@ import ProductCard from "./ProductCard";
 import { fonts } from "../../../constants/fonts";
 
 export default function Products({ search, activeFilter, navigation }) {
-  const [fetchData, loading] = useFetch(search, activeFilter, "", 0);
+  const [fetchData, loading] = useFetch("get", search, activeFilter, "", 0, "");
 
   return (
     <View style={styles.productsContainer}>

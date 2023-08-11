@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View, Dimensions } from "react-native";
 import { useEffect, useState, useRef } from "react";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import * as ImageManipulator from "expo-image-manipulator";
 
 const CameraComponent = ({
   setPhoto,
@@ -29,12 +30,19 @@ const CameraComponent = ({
 
   const takePic = async () => {
     let options = {
-      quality: 1,
+      quality: 0.5,
       base64: true,
       exif: false,
+      skipProcessing: false,
     };
     try {
       let newPhoto = await cameraRef.current.takePictureAsync(options);
+
+      const manipResult = await ImageManipulator.manipulateAsync(
+        newPhoto.uri,
+        [{ resize: { width: 1, height: 1 } }],
+        { compress: 0.5, format: "jpeg" }
+      );
       let encodedPhoto = `data:image/jpg;base64,${newPhoto.base64}`;
       setPhoto({ normal: newPhoto, encoded: encodedPhoto });
     } catch (err) {
