@@ -21,13 +21,13 @@ Step 4. Open another terminal and run 'cd client' then in the client subfolder r
 
 Step 5. After the client package.json is installed run 'npm start', a QR code should appear.
 
-Step 6. In the client subfolder find a folder named 'hooks' and in it a file called 'useFetch.js'. Open it and change the 'port' variable to the value shown below the QR code generated earlier (your Wi-Fi IpV4).
+Step 6. In the client subfolder find a folder named 'hooks' and in it a file called 'useFetch.js'. Open it and change the 'port' variable to the value shown below the QR code generated earlier (under the yellow box on the image below, its your Wi-Fi IpV4).
 
 ![image](https://github.com/LukassF/drop-ship/assets/132075104/c9f6ead9-9067-4e7c-b858-2a0ee78e36ea)
 
-![image](https://github.com/LukassF/drop-ship/assets/132075104/ac6f0f11-59c6-40a5-a49c-73b71d6961a0)
+![image](https://github.com/LukassF/drop-ship/assets/132075104/8a2e0e55-cfdc-4e11-b071-3a29498d5ac3)
 
-![image](https://github.com/LukassF/drop-ship/assets/132075104/7e63c42a-bf74-40d4-a087-d75d8315e087)
+![tempsnip](https://github.com/LukassF/drop-ship/assets/132075104/23aa6048-391d-472a-afc0-55df8345c3e8)
 
 Step 7. Install an Expo Go app on your mobile device.
 
