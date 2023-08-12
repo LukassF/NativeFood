@@ -49,7 +49,7 @@ export default function WelcomeSearch({
       >
         <View>
           <Text style={{ fontSize: 20, fontFamily: fonts.bold }}>
-            Welcome Łukasz!
+            Welcome Back!
           </Text>
           <Text style={{ fontSize: 12, fontFamily: fonts.medium }}>
             What are we eating today?
