@@ -71,6 +71,7 @@ export default function WelcomeSearch({
         />
         <TouchableOpacity
           style={styles.searchButton}
+          // onPress={() => window.location.reload()}
           onPress={() => setSearch(localSearch)}
         >
           <Image

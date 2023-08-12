@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     zIndex: 5,
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowRadius: 3.5,
-    shadowOpacity: 0.25,
-    elevation: 5,
+    // shadowColor: "#000000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 10,
+    // },
+    // shadowRadius: 3.5,
+    // shadowOpacity: 0.25,
+    // elevation: 5,
   },
 
   cardContent: {

@@ -32,6 +32,16 @@ const Random = ({ navigation }) => {
   const [changed, setChanged] = useState(false);
   const [animationLength, setAnimationLength] = useState(300);
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  navigation.addListener("focus", () => {
+    setIsLoaded(true);
+  });
+  navigation.addListener("blur", () => {
+    setIsLoaded(false);
+    setActiveFilter("");
+  });
+
   useEffect(() => {
     if (data) setArbitrary(data[Math.round(Math.random() * (data.length - 1))]);
   }, [data]);
@@ -84,7 +94,7 @@ const Random = ({ navigation }) => {
         </Text>
       </View>
 
-      {arbitrary && (
+      {arbitrary && isLoaded && (
         <RecipeCard
           item={arbitrary}
           navigation={navigation}

@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import CameraComponent from "../../components/add/CameraComponent";
+import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import { fonts } from "../../constants/fonts";
 import styles from "./add_page_style";
@@ -26,6 +27,7 @@ const Add = ({ navigation }) => {
   });
   navigation.addListener("blur", () => {
     setIsLoaded(false);
+    setPhoto("");
   });
   //-----------------------------------------------
 
@@ -43,9 +45,20 @@ const Add = ({ navigation }) => {
       }
     };
 
+    const sharePhoto = async () => {
+      try {
+        await shareAsync(photo.normal.uri);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     return (
       <SafeAreaView style={{ marginTop: StatusBar.currentHeight }}>
-        <ScrollView showsHorizontalScrollIndicator={false}>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
           <Text
             style={{
               fontSize: 20,
@@ -84,7 +97,10 @@ const Add = ({ navigation }) => {
                   resizeMode="cover"
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonSave}>
+              <TouchableOpacity
+                style={styles.buttonSave}
+                onPress={() => sharePhoto()}
+              >
                 <Image
                   source={{
                     uri: "https://cdn-icons-png.flaticon.com/512/1358/1358023.png",
@@ -94,7 +110,7 @@ const Add = ({ navigation }) => {
                 />
               </TouchableOpacity>
             </View>
-            <FormComponent photo={photo.encoded} />
+            {isLoaded && <FormComponent photo={photo.encoded} />}
           </View>
         </ScrollView>
       </SafeAreaView>

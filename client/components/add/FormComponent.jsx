@@ -11,6 +11,7 @@ import NumberInput from "./NumberInput";
 import { fonts } from "../../constants/fonts";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
+import FetchComponent from "./FetchComponent";
 
 const filters = [
   "Vegan",
@@ -30,6 +31,7 @@ const FormComponent = ({ photo }) => {
   const [ingredients, setIngredients] = useState("");
   const [preparation, setPreparation] = useState("");
   const [dataBody, setDataBody] = useState();
+  const [fetch, setFetch] = useState(false);
 
   function createRequestBody() {
     setDataBody({
@@ -49,18 +51,8 @@ const FormComponent = ({ photo }) => {
       const values = [...Object.values(dataBody)].filter(
         (item) => !item || item.length === 0
       );
-      if (values.length === 0) {
-        // console.log(dataBody);
-        fetch("http://192.168.1.105:5000/api/recipies", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataBody),
-        })
-          .then((res) => alert("Sent", res.status))
-          .catch((err) => console.log(err));
-      }
+      if (values.length === 0) setFetch(true);
+      else setFetch(false);
     }
   }, [dataBody]);
 
@@ -179,7 +171,7 @@ const FormComponent = ({ photo }) => {
           </Text>
           <View
             style={{
-              paddingTop: 20,
+              paddingTop: 30,
               //   paddingBottom: 20,
               flexDirection: "row",
               justifyContent: "space-around",
@@ -241,6 +233,8 @@ const FormComponent = ({ photo }) => {
           the upload)
         </Text>
       </View>
+
+      {fetch && <FetchComponent dataBody={dataBody} />}
     </View>
   );
 };

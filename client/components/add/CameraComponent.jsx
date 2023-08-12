@@ -30,7 +30,7 @@ const CameraComponent = ({
 
   const takePic = async () => {
     let options = {
-      quality: 0.5,
+      quality: 0.4,
       base64: true,
       exif: false,
       skipProcessing: false,
@@ -73,13 +73,18 @@ const CameraComponent = ({
             width: 80,
             height: 80,
             borderRadius: 500,
-            backgroundColor: "white",
+
             position: "absolute",
             bottom: "15%",
+            overflow: "hidden",
           }}
         >
           <TouchableOpacity
-            style={{ width: "100%", aspectRatio: 1 / 1 }}
+            style={{
+              width: "100%",
+              aspectRatio: 1 / 1,
+              backgroundColor: "white",
+            }}
             onPress={takePic}
           ></TouchableOpacity>
         </View>

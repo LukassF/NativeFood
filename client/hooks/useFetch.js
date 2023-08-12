@@ -12,13 +12,16 @@ export default function useFetch(
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  //Change this to the value that appears under the expo qr code when you run npm start in the client folder
+  const port = "192.168.1.105";
+
   // console.log(id);
   let options;
 
   if (method === "get")
     options = {
       method: "GET",
-      url: `http://192.168.1.105:5000/api/recipies?query=${searchValue}&filter=${selectedFilter}&id=[${
+      url: `http://${port}:5000/api/recipies?query=${searchValue}&filter=${selectedFilter}&id=[${
         id instanceof Array ? id.map((id) => id) : id
       }]`,
       // 192.168.1.105
@@ -27,7 +30,7 @@ export default function useFetch(
   else if (method === "post") {
     options = {
       method: "POST",
-      url: "http://192.168.1.105:5000/api/recipies",
+      url: `http://${port}:5000/api/recipies`,
       data: bodyData,
       contentType: "application/json",
     };
@@ -37,7 +40,7 @@ export default function useFetch(
     setLoading(true);
     try {
       const response = await axios.request(options);
-      if (method === "post") setData(response.status);
+      if (method === "post") alert("Recipe uploaded!");
       if (length > 0) setData(response.data.slice(0, length));
       else if (id instanceof Array && !id[0]) setData([]);
       else setData(response.data);

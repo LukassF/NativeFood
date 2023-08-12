@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
     aspectRatio: 1 / 1,
     borderRadius: 500,
     overflow: "hidden",
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowRadius: 3.5,
-    shadowOpacity: 0.25,
-    elevation: 5,
+    // shadowColor: "#000000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 10,
+    // },
+    // shadowRadius: 3.5,
+    // shadowOpacity: 0.25,
+    // elevation: 5,
   },
 
   content: {
