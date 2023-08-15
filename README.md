@@ -3,6 +3,7 @@
 * [General info](#general-info)
 * [Steps to run](#steps-to-run)
 * [Technologies](#technologies)
+* [Visualisation](#visualisation)
 
 
 ## General info
@@ -51,3 +52,11 @@ Server
 * express version: 4.18.2
 * mongoose version: 7.3.1
 * body-parser version: 1.20.2
+
+## Visualisation
+![Screenshot_20230815_171331_host exp exponent](https://github.com/LukassF/NativeFood/assets/132075104/47e02254-7ed8-4bea-9ddd-6895a031ec19)
+![Screenshot_20230815_171324_host exp exponent](https://github.com/LukassF/NativeFood/assets/132075104/7458399a-08a5-4c4b-bf3f-9200a0c72d12)
+![Screenshot_20230815_171237_host exp exponent](https://github.com/LukassF/NativeFood/assets/132075104/c87e1407-5c21-4eb7-8676-13569055fd43)
+![Screenshot_20230815_171255_host exp exponent](https://github.com/LukassF/NativeFood/assets/132075104/26a756f5-bc1d-4584-a355-88d7fa3d2ba6)
+![Screenshot_20230815_171357_host exp exponent](https://github.com/LukassF/NativeFood/assets/132075104/669ddb2b-e1d6-497f-a164-14f8e1189aca)
+
