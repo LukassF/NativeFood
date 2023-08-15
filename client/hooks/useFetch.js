@@ -13,7 +13,7 @@ export default function useFetch(
   const [loading, setLoading] = useState(true);
 
   //Change this to the value that appears under the expo qr code when you run npm start in the client folder
-  const port = "192.168.1.105";
+  const port = "YOUR_IP";
 
   // console.log(id);
   let options;
@@ -24,7 +24,6 @@ export default function useFetch(
       url: `http://${port}:5000/api/recipies?query=${searchValue}&filter=${selectedFilter}&id=[${
         id instanceof Array ? id.map((id) => id) : id
       }]`,
-      // 192.168.1.105
       contentType: "application/json",
     };
   else if (method === "post") {
